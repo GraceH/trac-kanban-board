@@ -25,7 +25,7 @@ function getCookie(c_name)
 
 function checkSession(){
     var check = true;
-    var trac_auth = getCookie('trac_auth');
+    /*var trac_auth = getCookie('trac_auth');
     var trac_form_token = getCookie('trac_form_token');
     var alert_msg = "Session expired. Please relogin.";
     if(trac_auth == null || trac_form_token == null){
@@ -35,7 +35,7 @@ function checkSession(){
     else if (trac_auth.length <= 0 || trac_form_token.length <= 0){
         check = false;
         alert(alert_msg);
-    }
+    }*/
     return check;
 };
 
@@ -46,7 +46,7 @@ kanban.Ticket = function(data) {
     var self = this;
 
     ko.mapping.fromJS(data, {
-        copy: ['id']
+        copy: ['id','owner']
     }, this);
 
     this.comment = ko.observable('');
@@ -55,6 +55,12 @@ kanban.Ticket = function(data) {
         if (self.id)
             return '#' + self.id;
         return '';
+    });
+
+    this.ownerString = ko.computed(function() {
+        if (self.owner)
+            return (self.owner+'').replace('@fosun.com',''); 
+        return 'unknown';
     });
 
     this.link = ko.computed(function() {

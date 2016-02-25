@@ -18,11 +18,15 @@
                     <li class="kanban-card" data-bind="click: $$root.selectTicket">
                         <span class="id-label" data-bind="text: idString">id</span>
                         <span data-bind="text: summary">summary</span>
+                        [<span data-bind="text: ownerString">owner</span>]
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
+    <!--<div class="board-container" style="height: $height;">
+        <div id="main"></div>
+    </div>-->
     <div id="ticketDialog" data-bind="with: dialogTicket" style="display: none;">
         <div>
             <span data-bind="if: $$data.time" class="date-time">

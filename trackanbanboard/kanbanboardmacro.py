@@ -38,7 +38,7 @@ class KanbanBoard:
     data_end_regexp = re.compile('\s*}}}')
 
     # These are ticket fields that must be present on all tickets
-    mandatory_fields = ['summary', 'status']
+    mandatory_fields = ['summary', 'status', 'owner']
 
     # These ticket fields are shown in detail dialog regardless of user's field definitions
     always_shown_fields = ['summary', 'description', 'time', 'changetime']
@@ -223,7 +223,10 @@ class KanbanBoard:
 
             # Get mandatory fields
             for field_name in self.mandatory_fields:
-                t[field_name] = ticket.get_value_or_default(field_name)
+                #if field_name == "owner":
+                #   t[field_name] = ticket.get_value_or_default(field_name).replace("@fosun.com","")
+                #else:
+                   t[field_name] = ticket.get_value_or_default(field_name)
 
             if id in detailed:
                 # Get fields that are are always shown in detail dialog
